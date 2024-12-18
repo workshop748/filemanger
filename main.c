@@ -40,15 +40,15 @@ int main()
 		case 1:
 			printf("please enter a file name you want to create");
 		case 2:
-			char[] message = "please enter a file name you want to read";
+			printf("please enter a file name you want to read");
 		case 3:
-			char[] message = "please enter a file name you want to write to";
+			printf("please enter a file name you want to write to");
 		case 4:
-			char[] message = "please enter a file name you want to append to";
+			printf("please enter a file name you want to append to");
 		case 5:
-			char[] message = "please enter a file name you want to find a word in";
+			printf("please enter a file name you want to append to");
 		case 6:
-			char[] thanks = "thank you for your vist";
+			printf("thank you for your vist");
 			break;
 		default:
 		{
