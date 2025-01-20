@@ -37,18 +37,21 @@ int main()
 
 		while (scanf("%d", &choice) != 1) {
 			printf("please enter a valid option");
+			while (getchar() != '\n');
 		}
-		printf(" you selected %d",choice);
-		break; 
+		printf(" you selected %d\n",choice);
+		
 
 		switch (choice)
 		{
 		case 1: {
+			//this is for creating a file
 			char name[100];
-			printf("please enter a file name you want to create");
+			printf("please enter a file name you want to create\n");
 			while (scanf("%96s", &name) != 1)
 			{
-				printf("please enter a valid file name");
+				printf("please enter a valid file name\n");
+				while (getchar() != '\n');
 			}
 
 			concat(name, ".txt");
@@ -59,16 +62,17 @@ int main()
 			}
 			else
 			{
-				printf("file created");
+				printf("file created\n");
 				fclose(file);
 			}
 			break;
 		}
 		case 2:
 		{
+			//this is for reading from a file
 			char name[100];
 			char letter;
-			printf("please enter a file name you want to create");
+			printf("please enter a file name you want to read from\n");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
@@ -85,14 +89,16 @@ int main()
 				while ((letter = fgetc(file)) != EOF) {
 					printf("%c", letter);
 				}
-				flose(file);
+				
 			}
+			fclose(file);
 			break;
 		}
 		case 3:
 		{
+			//this is reading from a file
 			char name[100];
-			printf("please enter a file name you want to create");
+			printf("please enter a file name you want to read");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
@@ -103,8 +109,9 @@ int main()
 		}
 		case 4:
 		{
+			//this is for appending to a file
 			char name[100];
-			printf("please enter a file name you want to create");
+			printf("please enter a file name you want to to append to");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
@@ -115,6 +122,7 @@ int main()
 		}
 		case 5:
 		{
+			//this is for finding a word in a file
 			char name[100];
 			printf("please enter a file name you want to create");
 			while (scanf("%96s", &name) != 1)
