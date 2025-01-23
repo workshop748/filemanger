@@ -1,6 +1,7 @@
 #include"stdio.h"
 #include"string.h"
 
+#define Max_WORD_SIZE 1000
 
 void concat(char* name, char* end)
 {
@@ -40,7 +41,7 @@ int main()
 			while (getchar() != '\n');
 		}
 		printf(" you selected %d\n",choice);
-		
+		while (getchar() != '\n');
 
 		switch (choice)
 		{
@@ -59,6 +60,7 @@ int main()
 			if (file == NULL)
 			{
 				printf("file could not be created");
+				return -1;
 			}
 			else
 			{
@@ -76,13 +78,15 @@ int main()
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
+				while (getchar() != '\n');
 			}
 
 			concat(name, ".txt");
 			FILE* file = fopen(name, "r");
 			if (file == NULL)
 			{
-				printf("file could not be created");
+				printf("There was a error reading from the file");
+				return -1;
 			}
 			else
 			{
@@ -96,41 +100,101 @@ int main()
 		}
 		case 3:
 		{
-			//this is reading from a file
+			//this is writing from a file
 			char name[100];
-			printf("please enter a file name you want to read");
+			printf("please enter a file name you want to write to: \n");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
+				while (getchar() != '\n');
 			}
 
 			concat(name, ".txt");
+			FILE* file = fopen(name, "w");
+			if (file != NULL)
+			{
+				char word[Max_WORD_SIZE];
+				printf("please enter a words you want to write to the file: ");
+				while (getchar() != '\n'); //clear the buffer
+
+				if (fgets(word, sizeof(word), stdin) != NULL) {
+				fprintf(file, "%s", word);
+				printf("your file has been written to\n");
+				}
+				else {
+					printf("There was an error writing to the file");
+				}
+			}
+			else {
+				printf("There was an error opening the file");
+			}
+
+			fclose(file);
+			printf("\n");
 			break;
 		}
 		case 4:
 		{
 			//this is for appending to a file
 			char name[100];
-			printf("please enter a file name you want to to append to");
+			printf("please enter a file name you want to to append to: \n");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
 			}
 
 			concat(name, ".txt");
+			FILE* file = fopen(name, "a");
+			if (file != NULL)
+			{
+				char word[Max_WORD_SIZE];
+				printf("please enter a words you want to append to the file: ");
+				while (getchar() != '\n'); //clear the buffer
+
+				
+				if (fgets(word, sizeof(word), stdin) != NULL) {
+					fprintf(file, "%s", word);
+					printf("your file has been written to\n");
+				}
+			}
+			else {
+				printf("There was an error opening the file");
+			}
+			fclose(file);
+
 			break;
 		}
 		case 5:
 		{
 			//this is for finding a word in a file
 			char name[100];
-			printf("please enter a file name you want to create");
+			printf("please enter a file name you want to find a word in:\n");
 			while (scanf("%96s", &name) != 1)
 			{
 				printf("please enter a valid file name");
 			}
 
 			concat(name, ".txt");
+			char line[Max_WORD_SIZE];
+			char word[100];
+			printf("please enter a file name you want to create");
+			while (scanf("%96s", &word) != 1)
+			{
+				printf("please enter a valid word");
+			}
+			int line_number = 0;
+			int found = 0;
+			FILE* file = fopen(name, "r");
+			while (fgets(line, sizeof(line), file)) {
+				line_number++;
+				if (strstr(line, word) != NULL)
+				{
+					printf("Found '%s' on line %d: %s",word, line_number,line);
+					found = 1;
+				}
+			}
+
+			fclose(file);
 			break;
 		}
 		case 6:
